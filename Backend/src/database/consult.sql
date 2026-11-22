@@ -4,4 +4,4 @@ SELECT * FROM courses;
 
 SELECT * FROM libros;
 
-SELECT * FROM autores;
+SELECT * FROM autors;

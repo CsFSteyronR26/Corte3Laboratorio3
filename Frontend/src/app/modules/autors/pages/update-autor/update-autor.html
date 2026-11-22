@@ -4,9 +4,9 @@
 
   <!-- Encabezado -->
   <div class="mb-4">
-    <h3 class="fw-bold mb-1">Editar docente</h3>
+    <h3 class="fw-bold mb-1">Editar autor</h3>
     <p class="text-muted mb-0">
-      Modifica la información del docente seleccionado.
+      Modifica la información del autor seleccionado.
     </p>
   </div>
 
@@ -15,13 +15,13 @@
     <div class="card-header bg-white py-3">
       <h5 class="mb-0">
         <i class="bi bi-person-gear me-2"></i>
-        Información del docente
+        Información del autor
       </h5>
     </div>
 
     <div class="card-body">
 
-      <form [formGroup]="teacherForm" (ngSubmit)="updateTeacher()">
+      <form [formGroup]="autorForm" (ngSubmit)="updateAutor()">
 
         <div class="row g-3">
 
@@ -35,7 +35,7 @@
               type="text"
               id="id"
               class="form-control"
-              formControlName="id"
+              [value]="id"
               readonly
             >
 
@@ -58,7 +58,7 @@
               placeholder="Ingrese el nombre completo"
             >
 
-            @if (teacherForm.get('name')?.touched && teacherForm.get('name')?.invalid) {
+            @if (autorForm.get('name')?.touched && autorForm.get('name')?.invalid) {
               <small class="text-danger">
                 El nombre es obligatorio.
               </small>
@@ -79,34 +79,53 @@
               placeholder="ejemplo@correo.com"
             >
 
-            @if (teacherForm.get('email')?.touched && teacherForm.get('email')?.invalid) {
+            @if (autorForm.get('email')?.touched && autorForm.get('email')?.invalid) {
               <small class="text-danger">
                 Ingresa un correo electrónico válido.
               </small>
             }
           </div>
 
-          <!-- Teléfono -->
+          <!-- Fecha de nacimiento -->
           <div class="col-md-6">
-            <label for="phone" class="form-label">
-              Teléfono *
+            <label for="birthday" class="form-label">
+              Fecha de nacimiento *
             </label>
 
             <input
-              type="tel"
-              id="phone"
+              type="date"
+              id="birthday"
               class="form-control"
-              formControlName="phone"
-              placeholder="Ingrese el teléfono"
+              formControlName="birthday"
             >
 
-            @if (teacherForm.get('phone')?.touched && teacherForm.get('phone')?.invalid) {
+            @if (autorForm.get('birthday')?.touched && autorForm.get('birthday')?.invalid) {
               <small class="text-danger">
-                El teléfono es obligatorio.
+                La fecha de nacimiento es obligatoria.
               </small>
             }
           </div>
 
+          <!-- Descripción -->
+          <div class="col-12">
+            <label for="description" class="form-label">
+              Descripción / Biografía *
+            </label>
+
+            <input
+              type="text"
+              id="description"
+              class="form-control"
+              formControlName="description"
+              placeholder="Ingrese una breve biografía del autor"
+            >
+
+            @if (autorForm.get('description')?.touched && autorForm.get('description')?.invalid) {
+              <small class="text-danger">
+                La descripción es obligatoria.
+              </small>
+            }
+          </div>
 
           <!-- Estado -->
           <div class="col-12">
@@ -119,7 +138,7 @@
               >
 
               <label class="form-check-label" for="status">
-                Docente activo
+                Autor activo
               </label>
             </div>
           </div>
@@ -142,10 +161,10 @@
           <button
             type="submit"
             class="btn btn-primary"
-            [disabled]="teacherForm.invalid"
+            [disabled]="autorForm.invalid"
           >
             <i class="bi bi-save me-2"></i>
-            Actualizar docente
+            Actualizar autor
           </button>
 
         </div>

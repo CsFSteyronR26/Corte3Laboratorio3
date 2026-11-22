@@ -29,7 +29,7 @@ export class CreateAutor {
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     description: ['', Validators.required],
-    birthday: ['', Validators.required],
+    birthdate: ['', Validators.required],
     status: [true]
   });
 
@@ -42,7 +42,7 @@ export class CreateAutor {
       name: this.autorForm.value.name!,
       email: this.autorForm.value.email!,
       description: this.autorForm.value.description!,
-      birthday: this.autorForm.value.birthday!,
+      birthdate: this.autorForm.value.birthdate!,
       status: this.autorForm.value.status!
     };
     console.log('Autor para enviar al backend:', Autor);

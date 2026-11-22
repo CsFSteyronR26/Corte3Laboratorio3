@@ -3,15 +3,15 @@
 
     <!-- Header -->
     <div class="mb-4">
-        <h3 class="fw-bold mb-1">Detalle del docente</h3>
+        <h3 class="fw-bold mb-1">Detalle del autor</h3>
         <p class="text-muted mb-0">
-            Información general y académica del docente.
+            Información general y biográfica del autor.
         </p>
     </div>
 
-    @if (teacher) {
+    @if (autor) {
 
-        <!-- Teacher Header -->
+        <!-- Autor Header -->
         <div class="card border mb-4">
             <div class="card-body p-4">
                 <div class="d-flex align-items-center gap-3">
@@ -22,16 +22,16 @@
                     </div>
 
                     <div class="flex-grow-1">
-                        <h4 class="fw-bold mb-1">{{ teacher.name }}</h4>
+                        <h4 class="fw-bold mb-1">{{ autor.name }}</h4>
                         <span class="text-muted">
-                            Docente #{{ teacher.id }}
+                            Autor #{{ autor.id }}
                         </span>
                     </div>
 
                     <span
                         class="badge rounded-pill"
-                        [ngClass]="teacher.status ? 'text-bg-success' : 'text-bg-danger'">
-                        {{ teacher.status ? 'Activo' : 'Inactivo' }}
+                        [ngClass]="autor.status ? 'text-bg-success' : 'text-bg-danger'">
+                        {{ autor.status ? 'Activo' : 'Inactivo' }}
                     </span>
 
                 </div>
@@ -40,7 +40,7 @@
 
         <div class="row g-4">
 
-            <!-- Personal Information -->
+            <!-- Información personal -->
             <div class="col-12 col-lg-7">
                 <div class="card border h-100">
 
@@ -57,31 +57,28 @@
 
                             <div class="col-12">
                                 <small class="text-muted d-block mb-1">Nombre completo</small>
-                                <span class="fw-medium">{{ teacher.name }}</span>
+                                <span class="fw-medium">{{ autor.name }}</span>
                             </div>
 
                             <div class="col-md-6">
                                 <small class="text-muted d-block mb-1">Correo electrónico</small>
                                 <span>
                                     <i class="bi bi-envelope text-secondary me-2"></i>
-                                    {{ teacher.email }}
+                                    {{ autor.email }}
                                 </span>
                             </div>
 
                             <div class="col-md-6">
-                                <small class="text-muted d-block mb-1">Teléfono</small>
+                                <small class="text-muted d-block mb-1">Fecha de nacimiento</small>
                                 <span>
-                                    <i class="bi bi-telephone text-secondary me-2"></i>
-                                    {{ teacher.phone }}
+                                    <i class="bi bi-calendar-event text-secondary me-2"></i>
+                                    {{ autor.birthdate | date:'dd/MM/yyyy' }}
                                 </span>
                             </div>
 
                             <div class="col-12">
-                                <small class="text-muted d-block mb-1">Estado</small>
-                                <span>
-                                    <i class="bi bi-geo-alt text-secondary me-2"></i>
-                                    {{ teacher.status ? 'Activo' : 'Inactivo' }}
-                                </span>
+                                <small class="text-muted d-block mb-1">Descripción / Biografía</small>
+                                <span class="fw-medium">{{ autor.description }}</span>
                             </div>
 
                         </div>
@@ -90,14 +87,14 @@
                 </div>
             </div>
 
-            <!-- Academic Information -->
+            <!-- Información adicional -->
             <div class="col-12 col-lg-5">
                 <div class="card border h-100">
 
                     <div class="card-header bg-white py-3">
                         <h5 class="fw-semibold mb-0">
-                            <i class="bi bi-mortarboard text-primary me-2"></i>
-                            Información académica
+                            <i class="bi bi-journal-bookmark text-primary me-2"></i>
+                            Información editorial
                         </h5>
                     </div>
 
@@ -106,9 +103,9 @@
                         <hr>
 
                         <div class="mb-4">
-                            <small class="text-muted d-block mb-2">Estado del docente</small>
+                            <small class="text-muted d-block mb-2">Estado del autor</small>
 
-                            @if (teacher.status) {
+                            @if (autor.status) {
                                 <span class="badge text-bg-success">
                                     <i class="bi bi-check-circle me-1"></i>
                                     Activo
@@ -124,8 +121,8 @@
                         <hr>
 
                         <div>
-                            <small class="text-muted d-block mb-2">Código de docente</small>
-                            <span class="fw-semibold">#{{ teacher.id }}</span>
+                            <small class="text-muted d-block mb-2">Código de autor</small>
+                            <span class="fw-semibold">#{{ autor.id }}</span>
                         </div>
 
                     </div>
@@ -138,7 +135,7 @@
 
         <div class="alert alert-warning">
             <i class="bi bi-exclamation-triangle me-2"></i>
-            No se encontró información del estudiante.
+            No se encontró información del autor.
         </div>
 
     }

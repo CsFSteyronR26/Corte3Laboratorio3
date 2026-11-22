@@ -40,8 +40,8 @@ export class ListAutors {
         this.autors = autors;
       },
       error: (error: any) => {
-        console.error('Error fetching teachers:', error);
-        this.alertService.toast('Error al consultar los maestros', 'error');
+        console.error('Error fetching autors:', error);
+        this.alertService.toast('Error al consultar los autores', 'error');
       }
     });
   }

@@ -46,13 +46,13 @@ export class CreateLibro {
     this.libroService.create(libro).subscribe({
       next: () => {
         this.alertService.toast(
-          'Aula registrada correctamente',
+          'Libro registrada correctamente',
           'success'
         );
-        this.router.navigateByUrl('/classrooms');
+        this.router.navigateByUrl('/libros');
       },
       error: () => {
-        this.alertService.toast('Error al crear el aula', 'error');
+        this.alertService.toast('Error al crear el libro', 'error');
       }
     })
 

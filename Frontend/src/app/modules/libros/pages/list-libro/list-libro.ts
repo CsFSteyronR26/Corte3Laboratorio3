@@ -14,7 +14,7 @@ import { LibroService } from '../../services/libro.service';
     Button,
     TableLibros
   ],
-  templateUrl: './list-libros.html',
+  templateUrl: './list-libro.html',
 })
 export class ListLibros {
 

@@ -3,7 +3,7 @@ export interface Autor {
   name: string;
   email: string;
   description: string;
-  birthday: string;
+  birthdate: string;
   status: boolean;
 }
 

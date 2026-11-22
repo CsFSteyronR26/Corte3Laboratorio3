@@ -3,35 +3,35 @@
 
     <!-- Header -->
     <div class="mb-4">
-        <h3 class="fw-bold mb-1">Detalle del aula</h3>
+        <h3 class="fw-bold mb-1">Detalle del libro</h3>
         <p class="text-muted mb-0">
             Información general
         </p>
     </div>
 
-    @if (classroom) {
+    @if(libro) {
 
-        <!-- Classroom Header -->
+        <!-- Libro Header -->
         <div class="card border mb-4">
             <div class="card-body p-4">
                 <div class="d-flex align-items-center gap-3">
 
                     <div class="rounded-circle bg-primary bg-opacity-10 text-primary d-flex align-items-center justify-content-center"
                          style="width: 65px; height: 65px; font-size: 2rem;">
-                        <i class="bi bi-person-fill"></i>
+                        <i class="bi bi-book-fill"></i>
                     </div>
 
                     <div class="flex-grow-1">
-                        <h4 class="fw-bold mb-1">{{ classroom.code }}</h4>
+                        <h4 class="fw-bold mb-1">{{ libro.name }}</h4>
                         <span class="text-muted">
-                            Aula #{{ classroom.id }}
+                            Libro #{{ libro.id }}
                         </span>
                     </div>
 
                     <span
                         class="badge rounded-pill"
-                        [ngClass]="classroom.status ? 'text-bg-success' : 'text-bg-danger'">
-                        {{ classroom.status ? 'Activa' : 'Inactiva' }}
+                        [ngClass]="libro.status ? 'text-bg-success' : 'text-bg-danger'">
+                        {{ libro.status ? 'Activo' : 'Inactivo' }}
                     </span>
 
                 </div>
@@ -40,14 +40,14 @@
 
         <div class="row g-4">
 
-            <!-- Personal Information -->
+            <!-- Información del libro -->
             <div class="col-12 col-lg-7">
                 <div class="card border h-100">
 
                     <div class="card-header bg-white py-3">
                         <h5 class="fw-semibold mb-0">
-                            <i class="bi bi-person-vcard text-primary me-2"></i>
-                            Información personal
+                            <i class="bi bi-journal-text text-primary me-2"></i>
+                            Información del libro
                         </h5>
                     </div>
 
@@ -55,19 +55,22 @@
 
                         <div class="row g-4">
 
-                            <div class="col-12">
-                                <small class="text-muted d-block mb-1">Código</small>
-                                <span class="fw-medium">{{ classroom.code }}</span>
+                            <div class="col-md-6">
+                                <small class="text-muted d-block mb-1">Nombre</small>
+                                <span class="fw-medium">{{ libro.name }}</span>
                             </div>
 
-                            
-
                             <div class="col-md-6">
-                                <small class="text-muted d-block mb-1">Capacidad</small>
+                                <small class="text-muted d-block mb-1">Editorial</small>
                                 <span>
-                                    <i class="bi bi-telephone text-secondary me-2"></i>
-                                    {{ classroom.capacity }}
+                                    <i class="bi bi-building text-secondary me-2"></i>
+                                    {{ libro.editorial }}
                                 </span>
+                            </div>
+
+                            <div class="col-12">
+                                <small class="text-muted d-block mb-1">Descripción</small>
+                                <span class="fw-medium">{{ libro.description }}</span>
                             </div>
 
                         </div>
@@ -76,32 +79,31 @@
                 </div>
             </div>
 
-            <!-- Academic Information -->
+            <!-- Información editorial y estado -->
             <div class="col-12 col-lg-5">
                 <div class="card border h-100">
 
                     <div class="card-header bg-white py-3">
                         <h5 class="fw-semibold mb-0">
-                            <i class="bi bi-mortarboard text-primary me-2"></i>
-                            Información académica
+                            <i class="bi bi-info-circle text-primary me-2"></i>
+                            Detalles adicionales
                         </h5>
                     </div>
 
-
-                        <hr>
+                    <div class="card-body p-4">
 
                         <div class="mb-4">
-                            <small class="text-muted d-block mb-2">Estado del aula</small>
+                            <small class="text-muted d-block mb-2">Estado del libro</small>
 
-                            @if (classroom.status) {
+                            @if (libro.status) {
                                 <span class="badge text-bg-success">
                                     <i class="bi bi-check-circle me-1"></i>
-                                    Activa
+                                    Activo
                                 </span>
                             } @else {
                                 <span class="badge text-bg-danger">
                                     <i class="bi bi-x-circle me-1"></i>
-                                    Inactiva
+                                    Inactivo
                                 </span>
                             }
                         </div>
@@ -109,19 +111,21 @@
                         <hr>
 
                         <div>
-                            <small class="text-muted d-block mb-2">Código de aula</small>
-                            <span class="fw-semibold">#{{ classroom.id }}</span>
+                            <small class="text-muted d-block mb-2">Código de registro</small>
+                            <span class="fw-semibold">#{{ libro.id }}</span>
                         </div>
 
                     </div>
                 </div>
             </div>
 
+        </div>
+
     } @else {
 
         <div class="alert alert-warning">
             <i class="bi bi-exclamation-triangle me-2"></i>
-            No se encontró información de la aula.
+            No se encontró información del libro.
         </div>
 
     }

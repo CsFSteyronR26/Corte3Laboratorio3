@@ -63,7 +63,7 @@ export class UpdateAutor {
       name: autor.name,
       email: autor.email,
       description: autor.description,
-      birthdate: autor.birthday,
+      birthdate: autor.birthdate,
       status: autor.status
     });
   }
@@ -80,7 +80,7 @@ export class UpdateAutor {
       name: formValue.name!,
       email: formValue.email!,
       description :formValue.description!,
-      birthday: formValue.birthdate!,
+      birthdate: formValue.birthdate!,
       status: formValue.status!
     };
 
