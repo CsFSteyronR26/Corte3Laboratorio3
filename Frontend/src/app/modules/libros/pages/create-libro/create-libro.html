@@ -1,0 +1,62 @@
+    <app-back />
+
+    <div class="container-fluid py-4">
+
+    <!-- Encabezado -->
+    <div class="mb-4">
+        <h3 class="fw-bold mb-1">Registrar libro</h3>
+        <p class="text-muted mb-0">
+            Completa la información para registrar un nuevo libro.
+        </p>
+    </div>
+
+    <!-- Formulario -->
+    <div class="card border">
+        <div class="card-header bg-white py-3">
+            <h5 class="mb-0">
+                <i class="bi bi-person-plus me-2"></i>
+                Información del libro
+            </h5>
+        </div>
+
+        <div class="card-body">
+
+            <form [formGroup]="libroForm" (ngSubmit)="createLibro()">
+
+                <div class="row g-3">
+
+                    
+                  
+                    
+
+                    <!-- Estado -->
+                    <div class="col-12">
+                        <div class="form-check form-switch mt-2">
+                            <input class="form-check-input" type="checkbox" id="status" formControlName="status">
+
+                            <label class="form-check-label" for="status">
+                                Libro activo
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr class="my-4">
+
+                <!-- Acciones -->
+                <div class="d-flex justify-content-end gap-2">
+
+                    <button type="submit" class="btn btn-primary" [disabled]="libroForm.invalid">
+                        <i class="bi bi-save me-2"></i>
+                        Registrar libro
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>

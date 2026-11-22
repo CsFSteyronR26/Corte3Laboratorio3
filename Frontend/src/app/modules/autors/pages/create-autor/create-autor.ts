@@ -5,7 +5,7 @@ import { Back } from '../../../shared/components/back/back';
 import { AlertService } from '../../../shared/services/alert.service';
 import { CreateAutorRequest } from '../../interfaces/autor';
 import { AutorService } from '../../services/autor.service';
-import { StudentService } from '../../../students/services/student.service';
+
 
 @Component({
   selector: 'app-create-autor',
@@ -24,36 +24,38 @@ export class CreateAutor {
 
   semesters = Array.from({ length: 10 }, (_, i) => i + 1);
 
-  teacherForm = this.fb.group({
+  autorForm = this.fb.group({
     
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    
+    description: ['', Validators.required],
+    birthday: ['', Validators.required],
     status: [true]
   });
 
-  createTeacher(): void {
-    if (this.teacherForm.invalid) {
-      this.teacherForm.markAllAsTouched();
+  createAutor(): void {
+    if (this.autorForm.invalid) {
+      this.autorForm.markAllAsTouched();
       return;
     }
-    const teacher: CreateAutorRequest = {
-      name: this.teacherForm.value.name!,
-      phone: this.teacherForm.value.phone!,
-      email: this.teacherForm.value.email!,
-      status: this.teacherForm.value.status!
+    const Autor: CreateAutorRequest = {
+      name: this.autorForm.value.name!,
+      email: this.autorForm.value.email!,
+      description: this.autorForm.value.description!,
+      birthday: this.autorForm.value.birthday!,
+      status: this.autorForm.value.status!
     };
-    console.log('Docente para enviar al backend:', teacher);
-    this.teacherService.create(teacher).subscribe({
+    console.log('Autor para enviar al backend:', Autor);
+    this.autorService.create(Autor).subscribe({
       next: () => {
         this.alertService.toast(
-          'Docente   registrado correctamente',
+          'Autor registrado correctamente',
           'success'
         );
-        this.router.navigateByUrl('/teachers');
+        this.router.navigateByUrl('/autors');
       },
       error: () => {
-        this.alertService.toast('Error al crear el docente', 'error');
+        this.alertService.toast('Error al crear el autor', 'error');
       }
     })
 

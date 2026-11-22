@@ -3,44 +3,47 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Back } from '../../../shared/components/back/back';
 import { AlertService } from '../../../shared/services/alert.service';
-import { CreateClassroomRequest } from '../../interfaces/classroom';
-import { ClassroomService } from '../../services/classroom.service';
+import { CreateLibroRequest } from '../../interfaces/libro';
+import { LibroService } from '../../services/libro.service';
 
 @Component({
-  selector: 'app-create-classroom',
+  selector: 'app-create-libro',
   imports: [
     Back, 
     ReactiveFormsModule
   ],
-  templateUrl: './create-classroom.html',
+  templateUrl: './create-libro.html',
 })
-export class CreateClassroom {
+export class CreateLibro {
 
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private alertService = inject(AlertService);
-  private classroomService = inject(ClassroomService);
+  private libroService = inject(LibroService);
 
   semesters = Array.from({ length: 10 }, (_, i) => i + 1);
 
-  classroomForm = this.fb.group({
-    code: ['', Validators.required],
-    capacity: ['', Validators.required],
+  libroForm = this.fb.group({
+
+    name: ['', Validators.required],
+    description: ['', Validators.required],
+    editorial: ['', Validators.required],
     status: [true]
   });
 
-  createClassroom(): void {
-    if (this.classroomForm.invalid) {
-      this.classroomForm.markAllAsTouched();
+  createLibro(): void {
+    if (this.libroForm.invalid) {
+      this.libroForm.markAllAsTouched();
       return;
     }
-    const classroom: CreateClassroomRequest = {
-      code: this.classroomForm.value.code!,
-      capacity: Number(this.classroomForm.value.capacity),
-      status: this.classroomForm.value.status!
+    const libro: CreateLibroRequest = {
+      name: this.libroForm.value.name!,
+      description: this.libroForm.value.description!,
+      editorial: this.libroForm.value.editorial!,
+      status: this.libroForm.value.status!
     };
-    console.log('Aula para enviar al backend:', classroom);
-    this.classroomService.create(classroom).subscribe({
+    console.log('Aula para enviar al backend:', libro);
+    this.libroService.create(libro).subscribe({
       next: () => {
         this.alertService.toast(
           'Aula registrada correctamente',

@@ -3,19 +3,19 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Back } from '../../../shared/components/back/back';
 import { AlertService } from '../../../shared/services/alert.service';
-import { Classroom, UpdateClassroomRequest } from '../../interfaces/classroom';
-import { ClassroomService } from '../../services/classroom.service';
+import { Libro, UpdateLibroRequest } from '../../interfaces/libro';
+import { LibroService } from '../../services/libro.service';
 
 
 @Component({
-  selector: 'app-update-classroom',
+  selector: 'app-update-libro',
   imports: [
     Back,
     ReactiveFormsModule
   ],
-  templateUrl: './update-classroom.html',
+  templateUrl: './update-libro.html',
 })
-export class UpdateClassroom {
+export class UpdateLibro {
 
   id!: number;
 
@@ -23,13 +23,14 @@ export class UpdateClassroom {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private alertService = inject(AlertService);
-  private classroomService = inject(ClassroomService);
+  private libroService = inject(LibroService);
 
   semesters = Array.from({ length: 10 }, (_, i) => i + 1);
 
-  classroomForm  = this.fb.group({
-    code: ['', Validators.required],
-    capacity: ['', Validators.required],
+  libroForm  = this.fb.group({
+    name: ['', Validators.required],
+    description: ['', Validators.required],
+    editorial: ['', Validators.required],
     status: [true]
   });
 
@@ -41,27 +42,28 @@ export class UpdateClassroom {
       this.goToList();
       return;
     }
-    this.getClassroom();
+    this.getLibro();
   }
 
-  getClassroom() {
-    this.classroomService.getById(this.id).subscribe({
-      next: (classroom) => {
-        this.setValues(classroom);
+  getLibro() {
+    this.libroService.getById(this.id).subscribe({
+      next: (libro) => {
+        this.setValues(libro);
       },
       error: (error: any) => {
         console.error('Error fetching classrooms:', error);
-        this.alertService.toast('Error al consultar el aula', 'error');
+        this.alertService.toast('Error al consultar el libro', 'error');
         this.goToList();
       }
     })
   }
 
-  setValues(classroom: Classroom): void {
-    this.classroomForm.patchValue({
-      code: classroom.code,
-      capacity: String(classroom.capacity),
-      status: classroom.status
+  setValues(libro: Libro): void {
+    this.libroForm.patchValue({
+      name: libro.name,
+      description: libro.description,
+      editorial: libro.editorial,
+      status: libro.status
     });
   }
 
@@ -76,30 +78,31 @@ export class UpdateClassroom {
   }
 
 
-  updateClassroom(): void {
-    if (this.classroomForm.invalid) {
-      this.classroomForm.markAllAsTouched();
+  updateLibro(): void {
+    if (this.libroForm.invalid) {
+      this.libroForm.markAllAsTouched();
       return;
     }
-    const formValue = this.classroomForm.getRawValue();
-    const classroom: UpdateClassroomRequest = {
-      code: formValue.code!,
-      capacity: Number(formValue.capacity),
+    const formValue = this.libroForm.getRawValue();
+    const libro: UpdateLibroRequest = {
+      name: formValue.name!,
+      description: formValue.description!,
+      editorial: formValue.editorial!,
       status: formValue.status!
     };
 
-    this.classroomService.update(this.id, classroom).subscribe({
+    this.libroService.update(this.id, libro).subscribe({
       next: () => {
         this.alertService.toast(
-          'Aula actualizada correctamente',
+          'libro actualizado correctamente',
           'success'
         );
         this.goToList();
       },
       error: (error: any) => {
-        console.error('Error updating classroom:', error);
+        console.error('Error updating libro:', error);
         this.alertService.toast(
-          'Error al actualizar el aula',
+          'Error al actualizar el libro',
           'error'
         );
       }
@@ -107,7 +110,7 @@ export class UpdateClassroom {
   }
 
   goToList() {
-    this.router.navigateByUrl('classrooms');
+    this.router.navigateByUrl('libros');
   }
 
 }

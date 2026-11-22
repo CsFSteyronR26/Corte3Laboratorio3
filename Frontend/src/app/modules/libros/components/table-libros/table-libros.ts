@@ -1,18 +1,18 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Button } from '../../../shared/components/button/button';
 import { ButtonConfig } from '../../../shared/interfaces/button';
-import { Classroom } from '../../interfaces/classroom';
-import { TableClassroomsActions, TableClassroomsEvents } from '../../interfaces/table-classrooms';
+import { Libro } from '../../interfaces/libro';
+import { TableLibrosActions, TableLibrosEvents } from '../../interfaces/table-libros';
 
 @Component({
-  selector: 'app-table-classrooms',
+  selector: 'app-table-libros',
   imports: [Button],
-  templateUrl: './table-classrooms.html',
+  templateUrl: './table-libros.html',
 })
-export class TableClassrooms {
+export class TableLibros {
 
-  @Input() classrooms: Classroom[] = [];
-  @Output() onClickActions = new EventEmitter<TableClassroomsEvents>();
+  @Input() libros: Libro[] = [];
+  @Output() onClickActions = new EventEmitter<TableLibrosEvents>();
 
   configDetailButton: ButtonConfig = {
     id: 'detail',
@@ -38,7 +38,7 @@ export class TableClassrooms {
     size: 'sm'
   }
 
-  click(id: number, action: TableClassroomsActions){
+  click(id: number, action: TableLibrosActions){
     this.onClickActions.emit({id, action});
   }
 
